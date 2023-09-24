@@ -7,7 +7,7 @@
 </head>
 <body>
     <form action="upload.php" method="POST" enctype="multipart/form-data">
-        <input type="file" name="file" multiple >
+        <input type="file" name="file[]" webkitdirectory multiple >
         <button type="submit" name="submit">_UPLOAD_</button>
     </form>
 

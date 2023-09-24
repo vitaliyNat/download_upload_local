@@ -1,11 +1,25 @@
 <?php
+function rearrange( $arr ){
+    foreach( $arr as $key => $all ){
+        foreach( $all as $i => $val ){
+            $new[$i][$key] = $val;    
+        }    
+    }
+    return $new;
+}
 if(isset($_POST['submit'])){
-    $file = $_FILES['file'];
-    $fileName = $_FILES['file']['name'];
-    $fileTmpName = $_FILES['file']['tmp_name'];
-    $fileSize = $_FILES['file']['size'];
-    $fileError = $_FILES['file']['error'];
-    $fileType = $_FILES['file']['type'];
+    $file = rearrange($_FILES['file']);
+    print_r($file);
+    
+    
+    for ($i=0; $i <count($file) ; $i++)
+    
+     {
+    $fileName = $file['name'][i];
+    $fileTmpName = $file['tmp_name'][i];
+    $fileSize = $file['size'][i];
+    $fileError = $file['error'][i];
+    $fileType = $file['type'][i];
     
 
     $fileExt = explode('.', $fileName);
@@ -21,7 +35,7 @@ if(isset($_POST['submit'])){
                 $fileDestination = 'files/'.$fileName;
 
                 move_uploaded_file($fileTmpName, $fileDestination);
-                //header("Location: index.php?uploadsuccess");
+                header("Location: index.php?uploadsuccess");
             }else{
                 echo "YOUR FILE IS TOO BIG!";
             }
@@ -32,5 +46,7 @@ if(isset($_POST['submit'])){
     }else{
         echo "YOU CAN NO UPLOAD FILES OF THIS TYPE!";
     }
+     }
+    
 }
 ?>
